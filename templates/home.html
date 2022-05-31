@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block main %}
+<div class="row">
+    <div class="col-md-8 mx-auto">
+        <h1>Authenticate your user with Twitter</h1>
+        <a class="btn btn-lg btn-success" href="{{ callback_url }}">Authenticate user</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,9 @@
+# python files
+venv/
+__pycache__/
+*.pyc
+
+
+# db files
+*.db
+*.db3

@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block main %}
+<div class="row">
+    <div class="col-md-8 mx-auto">
+        <h1 class="alert alert-danger">Application error: {{ error_code }}</h1>
+        <p class="align-center"> {{ error_msg }}</p>
+    </div>
+</div>
+{% endblock %}
