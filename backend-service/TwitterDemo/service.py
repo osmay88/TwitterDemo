@@ -16,8 +16,10 @@ TWITTER_SHOW_USER_URL = "%s/1.1/users/show.json" % TWITTER_API_URL
 TWITTER_CONSUMER_KEY = os.environ.get("TWITTER_CONSUMER_KEY")
 TWITTER_CONSUMER_SECRET = os.environ.get("TWITTER_CONSUMER_SECRET")
 
+print("%s : %s" % (TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET))
+
 if not TWITTER_CONSUMER_KEY or not TWITTER_CONSUMER_SECRET:
-    raise "Twitter credentials are missing"
+    raise Exception("Twitter credentials are missing")
 
 
 def hash_client_address(addr: str):

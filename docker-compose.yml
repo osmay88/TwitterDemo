@@ -1,0 +1,20 @@
+version: '3.1'
+
+services:
+  backend:
+    build:
+      context: ./
+      dockerfile: ./backend-service/Dockerfile
+    container_name: backend-service
+    environment:
+      - TWITTER_CONSUMER_KEY=
+      - TWITTER_CONSUMER_SECRET=
+    secrets:
+      - secrets.json
+    ports:
+      - "8000:80"
+    command: ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "80"]
+
+secrets:
+  secrets.json:
+    file: secrets.json

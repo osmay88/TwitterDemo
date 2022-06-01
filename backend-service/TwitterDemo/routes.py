@@ -40,16 +40,24 @@ async def home(request: Request, db: AsyncSession = Depends(get_db)):
     if not client:
         client = ClientInfo()
         client.id = client_addr
-        client.client_oauth_token = oauth_token
-        client.client_oauth_secret = oauth_token_secret
-        db.add(client)
-        await db.commit()
+    client.consumer_oauth_token = oauth_token
+    client.consumer_oauth_secret = oauth_token_secret
+    db.add(client)
+    await db.commit()
     return templating.TemplateResponse("home.html", context)
 
 
 @router.get("/oauth/callback")
-async def authorize(request: Request, db: Session = Depends(get_db)):
+async def authorize(request: Request, db: AsyncSession = Depends(get_db)):
     client_addr = hash_client_address(request.client.host)
+    client = await get_client(db, client_addr)
+    client_oauth_token = request.query_params.get("oauth_token")
+    client_oauth_verifier = request.query_params.get("oauth_verifier")
+    if client:
+        client.client_oauth_token = client_oauth_token
+        client.client_oauth_verifier = client_oauth_verifier
+        db.add(client)
+        await db.commit()
     return ""
 
 
